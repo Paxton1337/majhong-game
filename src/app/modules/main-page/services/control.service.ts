@@ -12,19 +12,16 @@ export class ControlService {
 
   constructor() { }
 
-  getPairArray(genNumber: number): Observable<Pair[]> {
+  generatePairArray(genNumber: number): Observable<number[]> {
     const primeArray = Array
       .from(Array(genNumber).keys())
       .filter(num => isPrime(num));
 
-    return of(
-      [...primeArray, ...primeArray].map((num, i) => ({ id: i, number: num }))
-    );
+    return of(primeArray);
   }
 
-  onSelect(selectedNumber: number): any {
+  onSelect(selectedNumber: number): boolean | string {
     this.compareArr.push(selectedNumber);
-    console.log(this.compareArr);
     if (this.compareArr.length === 3 && this.compareArr[0] === this.compareArr[1]) {
       this.compareArr = this.compareArr.splice(-1, 1);
       return true;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pair } from '@models/pair';
 import { ControlService } from '../../services/control.service';
-
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -15,8 +15,10 @@ export class MainPageComponent implements OnInit {
   constructor(private service: ControlService) { }
 
   ngOnInit(): void {
-    this.service.getPairArray(50).subscribe(pairArr => {
-      this.pairArr = pairArr;
-    });
+    this.service.generatePairArray(50).pipe(
+      map(
+        primeArray => [...primeArray, ...primeArray].map((num, i) => ({ id: i, number: num }))
+      )
+    ).subscribe(pairArr => this.pairArr = pairArr);
   }
 }

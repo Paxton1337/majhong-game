@@ -11,7 +11,7 @@ export class GameContainerComponent implements OnInit {
   @Input() pairsArray: Pair[];
   @Input() startGame: boolean;
   selectedPairs: Pair[] = [];
-  solvedArr: Pair[] = [];
+  solvedPairs: Pair[] = [];
   constructor(private service: ControlService) { }
 
   ngOnInit(): void {
@@ -23,14 +23,10 @@ export class GameContainerComponent implements OnInit {
 
     const isValid = this.service.onSelect(pair.number);
 
-    if (typeof isValid === 'string') {
-      console.log('wait second number');
-    } else if (isValid) {
-      this.solvedArr = [...this.solvedArr, ...this.selectedPairs.splice(0, 2)];
-      console.log(this.solvedArr, this.selectedPairs);
-      // this.selectedPairs = [];
-    } else if (!isValid) {
-      this.selectedPairs = [];
+    if (!(typeof isValid === 'string')) {
+      isValid
+        ? this.solvedPairs = [...this.solvedPairs, ...this.selectedPairs.splice(0, 2)]
+        : this.selectedPairs = [];
     }
   }
 
@@ -39,11 +35,11 @@ export class GameContainerComponent implements OnInit {
   }
 
   isSolved(id: number): boolean {
-    return !!this.solvedArr.find(pair => pair.id === id);
+    return !!this.solvedPairs.find(pair => pair.id === id);
   }
 
   isHidden(id: number): boolean {
-    return !(!this.startGame || (this.isSelected(id) || this.isSolved(id)));
+    return !this.startGame || (this.isSelected(id) || this.isSolved(id));
   }
 
 }
