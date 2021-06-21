@@ -1,0 +1,5 @@
+<div class="row d-flex flex-wrap mx-5">
+  <app-card class="col-1 my-3 d-flex justify-content-center" [pair]="pair" [startGame]="startGame" (OnSelect)="onSelect(pair)"
+    [isHidden]="isHidden(pair.id)" [isSolved]="isSolved(pair.id)" [isSelected]="isSelected(pair.id)"
+    *ngFor="let pair of pairsArray | shuffle"></app-card>
+</div>

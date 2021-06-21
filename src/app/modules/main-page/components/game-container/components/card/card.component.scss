@@ -1,0 +1,16 @@
+.is-hidden {
+  opacity: 0;
+}
+
+.card-container {
+  border-radius: 0.25rem;
+  width: 56px;
+  height: 58px;
+  &:hover {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: box-shadow 0.25s;
+  }
+  &.is-selected {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+}
