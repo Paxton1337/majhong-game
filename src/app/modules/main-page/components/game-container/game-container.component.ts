@@ -43,11 +43,7 @@ export class GameContainerComponent implements OnInit {
   }
 
   isHidden(id: number): boolean {
-    if (!this.startGame || (this.isSelected(id) || this.isSolved(id))) {
-      return false;
-    } else {
-      return true;
-    }
+    return !(!this.startGame || (this.isSelected(id) || this.isSolved(id)));
   }
 
 }

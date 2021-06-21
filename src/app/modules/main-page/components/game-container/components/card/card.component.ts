@@ -1,7 +1,6 @@
 import { Output } from '@angular/core';
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { Pair } from '@models/pair';
-import { ControlService } from 'src/app/modules/main-page/services/control.service';
 
 @Component({
   selector: 'app-card',
